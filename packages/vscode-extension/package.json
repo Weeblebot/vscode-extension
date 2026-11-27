@@ -1,0 +1,587 @@
+{
+  "name": "weeble",
+  "displayName": "Weeble Workspace",
+  "publisher": "Weeble",
+  "description": "Deploy Weeble bots and manage their revisions, logs, KV data and packages.",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Weeblebot/vscode-extension.git",
+    "directory": "packages/vscode-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/Weeblebot/vscode-extension/issues"
+  },
+  "homepage": "https://weeble.works/docs/editing.html#in-vs-code",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "files": [
+    "dist",
+    "media",
+    "snippets",
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "activationEvents": [
+    "onUri",
+    "workspaceContains:.weeble/project.json"
+  ],
+  "main": "./dist/extension-node.cjs",
+  "browser": "./dist/extension-web.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "weeble.signIn",
+        "title": "Sign In",
+        "category": "Weeble",
+        "icon": "$(account)"
+      },
+      {
+        "command": "weeble.enterApiKey",
+        "title": "Sign In with API Key",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.signOut",
+        "title": "Sign Out",
+        "category": "Weeble",
+        "icon": "$(sign-out)"
+      },
+      {
+        "command": "weeble.selectDeployment",
+        "title": "Select Deployment",
+        "category": "Weeble",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "weeble.deploy",
+        "title": "Deploy",
+        "category": "Weeble",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "weeble.refresh",
+        "title": "Refresh",
+        "category": "Weeble",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "weeble.menu",
+        "title": "Show Menu",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.logs",
+        "title": "Show Runtime Logs",
+        "category": "Weeble",
+        "icon": "$(output)"
+      },
+      {
+        "command": "weeble.stopLogs",
+        "title": "Stop Runtime Logs",
+        "category": "Weeble",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "weeble.setEntrypoint",
+        "title": "Set Entrypoint",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.copyDeploymentId",
+        "title": "Copy Deployment ID",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.openDashboard",
+        "title": "Open Dashboard",
+        "category": "Weeble",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "weeble.checkSdkUpdates",
+        "title": "Check for SDK Updates",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.updateSdk",
+        "title": "Update SDK",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.showSdkReleaseNotes",
+        "title": "Show SDK Release Notes",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.activateRevision",
+        "title": "Activate Revision",
+        "category": "Weeble",
+        "icon": "$(play-circle)"
+      },
+      {
+        "command": "weeble.compareRevision",
+        "title": "Compare Revision with Workspace",
+        "category": "Weeble",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "weeble.restoreRevision",
+        "title": "Restore Revision to Workspace",
+        "category": "Weeble",
+        "icon": "$(history)"
+      },
+      {
+        "command": "weeble.copyRevisionNumber",
+        "title": "Copy Revision Number",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.openRevisionDiff",
+        "title": "Open Changes",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.createKvItem",
+        "title": "New KV Entry",
+        "category": "Weeble",
+        "icon": "$(add)"
+      },
+      {
+        "command": "weeble.createKvItemInNamespace",
+        "title": "New Entry",
+        "category": "Weeble",
+        "icon": "$(add)"
+      },
+      {
+        "command": "weeble.openKvItem",
+        "title": "Open KV Entry",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.copyKvNamespace",
+        "title": "Copy Namespace",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.deleteKvNamespace",
+        "title": "Delete Namespace…",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.copyKvKey",
+        "title": "Copy Key",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.copyKvValue",
+        "title": "Copy Value",
+        "category": "Weeble",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "weeble.deleteKvItem",
+        "title": "Delete Key…",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.addPackage",
+        "title": "Add Package",
+        "category": "Weeble",
+        "icon": "$(add)"
+      },
+      {
+        "command": "weeble.requestPackage",
+        "title": "Request npm Package",
+        "category": "Weeble"
+      },
+      {
+        "command": "weeble.syncPackages",
+        "title": "Sync Packages",
+        "category": "Weeble",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "weeble.uninstallPackage",
+        "title": "Remove Package…",
+        "category": "Weeble",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "weeble.openNpmPackage",
+        "title": "Open on npm",
+        "category": "Weeble",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "weeble.openPackageRequest",
+        "title": "Open Package Request",
+        "category": "Weeble",
+        "icon": "$(open-preview)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "weeble.menu",
+          "when": "false"
+        },
+        {
+          "command": "weeble.copyRevisionNumber",
+          "when": "false"
+        },
+        {
+          "command": "weeble.openRevisionDiff",
+          "when": "false"
+        },
+        {
+          "command": "weeble.createKvItemInNamespace",
+          "when": "false"
+        },
+        {
+          "command": "weeble.openKvItem",
+          "when": "false"
+        },
+        {
+          "command": "weeble.copyKvNamespace",
+          "when": "false"
+        },
+        {
+          "command": "weeble.deleteKvNamespace",
+          "when": "false"
+        },
+        {
+          "command": "weeble.copyKvKey",
+          "when": "false"
+        },
+        {
+          "command": "weeble.copyKvValue",
+          "when": "false"
+        },
+        {
+          "command": "weeble.deleteKvItem",
+          "when": "false"
+        },
+        {
+          "command": "weeble.uninstallPackage",
+          "when": "false"
+        },
+        {
+          "command": "weeble.openNpmPackage",
+          "when": "false"
+        },
+        {
+          "command": "weeble.signIn",
+          "when": "!weeble.signedIn"
+        },
+        {
+          "command": "weeble.enterApiKey",
+          "when": "!weeble.signedIn"
+        },
+        {
+          "command": "weeble.signOut",
+          "when": "weeble.signedIn"
+        },
+        {
+          "command": "weeble.selectDeployment",
+          "when": "weeble.signedIn"
+        },
+        {
+          "command": "weeble.stopLogs",
+          "when": "weeble.streamingLogs"
+        },
+        {
+          "command": "weeble.deploy",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.refresh",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.logs",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.setEntrypoint",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.copyDeploymentId",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.checkSdkUpdates",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.updateSdk",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.showSdkReleaseNotes",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.activateRevision",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.compareRevision",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.restoreRevision",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.createKvItem",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.addPackage",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.requestPackage",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.syncPackages",
+          "when": "weeble.signedIn && weeble.hasProject"
+        },
+        {
+          "command": "weeble.openPackageRequest",
+          "when": "weeble.signedIn && weeble.hasProject"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "weeble.deploy",
+          "when": "weeble.signedIn && weeble.hasProject",
+          "group": "navigation@100"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "weeble.deploy",
+          "when": "view == weeble.sidebar && weeble.signedIn && weeble.hasProject",
+          "group": "navigation@1"
+        },
+        {
+          "command": "weeble.refresh",
+          "when": "view == weeble.sidebar && weeble.signedIn && weeble.hasProject",
+          "group": "navigation@2"
+        },
+        {
+          "command": "weeble.logs",
+          "when": "view == weeble.sidebar && weeble.signedIn && weeble.hasProject",
+          "group": "1_deployment@1"
+        },
+        {
+          "command": "weeble.selectDeployment",
+          "when": "view == weeble.sidebar && weeble.signedIn",
+          "group": "1_deployment@2"
+        },
+        {
+          "command": "weeble.setEntrypoint",
+          "when": "view == weeble.sidebar && weeble.signedIn && weeble.hasProject",
+          "group": "1_deployment@3"
+        },
+        {
+          "command": "weeble.openDashboard",
+          "when": "view == weeble.sidebar",
+          "group": "2_account@1"
+        },
+        {
+          "command": "weeble.signOut",
+          "when": "view == weeble.sidebar && weeble.signedIn",
+          "group": "2_account@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "weeble.activateRevision",
+          "when": "view == weeble.sidebar && viewItem == weeble.revision",
+          "group": "inline"
+        },
+        {
+          "command": "weeble.activateRevision",
+          "when": "view == weeble.sidebar && viewItem == weeble.revision",
+          "group": "1_revision@1"
+        },
+        {
+          "command": "weeble.compareRevision",
+          "when": "view == weeble.sidebar && viewItem =~ /^weeble\\.revision/",
+          "group": "1_revision@2"
+        },
+        {
+          "command": "weeble.restoreRevision",
+          "when": "view == weeble.sidebar && viewItem =~ /^weeble\\.revision/",
+          "group": "1_revision@3"
+        },
+        {
+          "command": "weeble.copyRevisionNumber",
+          "when": "view == weeble.sidebar && viewItem =~ /^weeble\\.revision/",
+          "group": "9_copy@1"
+        },
+        {
+          "command": "weeble.createKvItem",
+          "when": "view == weeble.sidebar && viewItem == weeble.kv",
+          "group": "inline"
+        },
+        {
+          "command": "weeble.createKvItemInNamespace",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvNamespace",
+          "group": "inline"
+        },
+        {
+          "command": "weeble.copyKvNamespace",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvNamespace",
+          "group": "9_copy@1"
+        },
+        {
+          "command": "weeble.deleteKvNamespace",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvNamespace",
+          "group": "99_delete@1"
+        },
+        {
+          "command": "weeble.copyKvValue",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvKey",
+          "group": "inline"
+        },
+        {
+          "command": "weeble.copyKvValue",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvKey",
+          "group": "9_copy@1"
+        },
+        {
+          "command": "weeble.copyKvKey",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvKey",
+          "group": "9_copy@2"
+        },
+        {
+          "command": "weeble.deleteKvItem",
+          "when": "view == weeble.sidebar && viewItem == weeble.kvKey",
+          "group": "99_delete@1"
+        },
+        {
+          "command": "weeble.addPackage",
+          "when": "view == weeble.sidebar && viewItem == weeble.packages",
+          "group": "inline"
+        },
+        {
+          "command": "weeble.addPackage",
+          "when": "view == weeble.sidebar && viewItem == weeble.packages",
+          "group": "1_packages@1"
+        },
+        {
+          "command": "weeble.requestPackage",
+          "when": "view == weeble.sidebar && viewItem == weeble.packages",
+          "group": "1_packages@2"
+        },
+        {
+          "command": "weeble.syncPackages",
+          "when": "view == weeble.sidebar && viewItem == weeble.packages",
+          "group": "1_packages@3"
+        },
+        {
+          "command": "weeble.openNpmPackage",
+          "when": "view == weeble.sidebar && viewItem == weeble.package",
+          "group": "1_package@1"
+        },
+        {
+          "command": "weeble.uninstallPackage",
+          "when": "view == weeble.sidebar && viewItem == weeble.package",
+          "group": "99_delete@1"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "weeble",
+          "title": "Weeble",
+          "icon": "media/weeble.svg"
+        }
+      ]
+    },
+    "views": {
+      "weeble": [
+        {
+          "id": "weeble.sidebar",
+          "name": "Weeble"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "weeble.sidebar",
+        "when": "workbenchState == empty",
+        "contents": "Open a folder to connect it to a Weeble deployment.\n[Open Folder](command:vscode.openFolder)"
+      },
+      {
+        "view": "weeble.sidebar",
+        "when": "workbenchState != empty && !weeble.signedIn",
+        "contents": "Sign in to deploy your bot and manage its revisions, KV data and packages from VS Code.\n[Sign In](command:weeble.signIn)"
+      },
+      {
+        "view": "weeble.sidebar",
+        "when": "workbenchState != empty && weeble.signedIn && !weeble.hasProject",
+        "contents": "Connect this folder to a deployment. Its files are downloaded here.\n[Select Deployment](command:weeble.selectDeployment)\n[Open Dashboard](command:weeble.openDashboard)"
+      }
+    ],
+    "configuration": {
+      "title": "Weeble",
+      "properties": {
+        "weeble.apiUrl": {
+          "type": "string",
+          "default": "https://api.weeble.works",
+          "description": "Weeble API base URL."
+        },
+        "weeble.buildServiceUrl": {
+          "type": "string",
+          "default": "https://build.weeble.works",
+          "description": "Weeble browser build service URL."
+        }
+      }
+    },
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/weeble.code-snippets"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/weeble.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "package": "pnpm run build && vsce package --no-dependencies",
+    "pretest": "pnpm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@weeble/api-client": "workspace:*",
+    "@weeble/project": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/vscode": "^1.96.0",
+    "@vscode/vsce": "^3.6.2",
+    "esbuild": "0.28.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.15"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "weeble-vscode-extension",
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "build": "pnpm -C packages/vscode-extension build",
+    "package": "pnpm -C packages/vscode-extension package",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

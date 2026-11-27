@@ -1,0 +1,8 @@
+packages:
+  - "packages/api-client"
+  - "packages/project"
+  - "packages/types"
+  - "packages/vscode-extension"
+
+onlyBuiltDependencies:
+  - esbuild

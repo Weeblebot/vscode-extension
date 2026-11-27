@@ -1,0 +1,94 @@
+{
+  "Weeble: event handler": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-on",
+    "description": "Run code when a Discord event arrives",
+    "body": [
+      "discord.on(discord.events.${1|MESSAGE_CREATE,GUILD_MEMBER_ADD,MESSAGE_REACTION_ADD,INTERACTION_CREATE|}, async (${2:event}) => {",
+      "  $0",
+      "});"
+    ]
+  },
+  "Weeble: command application": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-commands",
+    "description": "Create the command application that every command registers on",
+    "body": [
+      "export const commands = discord.commands.create({",
+      "  prefixes: [\"${1:!}\"],",
+      "  onInputError: async (error, context) => {",
+      "    const usage = error.usage ? `\\nUsage: \\${error.usage}` : \"\";",
+      "    await context.reply(`\\${error.message}\\${usage}`);",
+      "  },",
+      "});"
+    ]
+  },
+  "Weeble: slash command": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-slash",
+    "description": "A slash command with one option",
+    "body": [
+      "commands.slash(",
+      "  {",
+      "    name: \"${1:hello}\",",
+      "    description: \"${2:Say hello}\",",
+      "    options: (option) => ({",
+      "      ${3:user}: option.${4|user,string,integer,boolean,channel,role|}(\"${5:Who to greet}\").optional(),",
+      "    }),",
+      "  },",
+      "  async (interaction, args) => {",
+      "    await interaction.reply(${6:\"Hello!\"});",
+      "  },",
+      ");"
+    ]
+  },
+  "Weeble: prefix command": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-prefix",
+    "description": "A prefix command that takes the rest of the message as text",
+    "body": [
+      "commands.prefix(",
+      "  {",
+      "    name: \"${1:say}\",",
+      "    description: \"${2:Repeat some text}\",",
+      "    args: (argument) => ({",
+      "      text: argument.rest(\"${3:Text to repeat}\"),",
+      "    }),",
+      "  },",
+      "  async (message, args) => {",
+      "    await message.reply(args.text);",
+      "  },",
+      ");"
+    ]
+  },
+  "Weeble: KV store": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-kv",
+    "description": "A KV namespace with typed get and put",
+    "body": [
+      "type ${1:Settings} = {",
+      "  ${2:welcomeChannelId}: string;",
+      "};",
+      "",
+      "const ${3:settings} = new weeble.KVNamespace(\"${4:settings}\");",
+      "",
+      "async function get${1}(key: string): Promise<${1} | undefined> {",
+      "  return ${3}.get<${1}>(key);",
+      "}",
+      "",
+      "async function put${1}(key: string, value: ${1}): Promise<void> {",
+      "  await ${3}.put(key, value);",
+      "}"
+    ]
+  },
+  "Weeble: recurring task": {
+    "scope": "typescript,javascript",
+    "prefix": "wb-cron",
+    "description": "Run code on an interval or a cron schedule (UTC)",
+    "body": [
+      "weeble.cron.${1|every,schedule|}(\"${2:task-name}\", \"${3:1h}\", async (task) => {",
+      "  $0",
+      "});"
+    ]
+  }
+}

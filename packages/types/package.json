@@ -1,0 +1,10 @@
+{
+  "name": "@weeble/types",
+  "version": "3.6.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./lib.weeble.d.ts": "./lib.weeble.d.ts",
+    "./runtime.d.ts": "./runtime.d.ts"
+  }
+}
